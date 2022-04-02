@@ -55,64 +55,67 @@ class BranchNBound :
     def searchSolution(self):
         print("Mencari solusi...")
         start = time()
-        found = False
-        while(self.prioQ and not found):
-            now = self.prioQ.get()[1]
-            try:
-                newNode = now.UP()
-                self.nodeList[newNode.name]=newNode
-                newString = toString(newNode.matrix)
-                if not self.visited.get(newString,False) :
-                    if newNode.isGoal():
-                        found=True
-                        ans=newNode
-                    else:
-                        self.prioQ.put((newNode.cost,newNode))
-            except :
-                pass
+        if(self.start.isGoal()):
+            ans=self.start
+        else:
+            found = False
+            while(self.prioQ and not found):
+                now = self.prioQ.get()[1]
+                try:
+                    newNode = now.UP()
+                    self.nodeList[newNode.name]=newNode
+                    newString = toString(newNode.matrix)
+                    if not self.visited.get(newString,False) :
+                        if newNode.isGoal():
+                            found=True
+                            ans=newNode
+                        else:
+                            self.prioQ.put((newNode.cost,newNode))
+                except :
+                    pass
 
 
-            try:
-                newNode = now.DOWN()
-                self.nodeList[newNode.name]=newNode
-                newString = toString(newNode.matrix)
-                if not self.visited.get(newString,False) :
-                    if newNode.isGoal():
-                        found=True
-                        ans=newNode
-                    else:
-                        self.prioQ.put((newNode.cost,newNode))
-            except :
-                pass
+                try:
+                    newNode = now.DOWN()
+                    self.nodeList[newNode.name]=newNode
+                    newString = toString(newNode.matrix)
+                    if not self.visited.get(newString,False) :
+                        if newNode.isGoal():
+                            found=True
+                            ans=newNode
+                        else:
+                            self.prioQ.put((newNode.cost,newNode))
+                except :
+                    pass
 
 
-            try:
-                newNode = now.RIGHT()
-                self.nodeList[newNode.name]=newNode
-                newString = toString(newNode.matrix)
-                if not self.visited.get(newString,False) :
-                    if newNode.isGoal():
-                        found=True
-                        ans=newNode
-                    else:
-                        self.prioQ.put((newNode.cost,newNode))
-            except :
-                pass
+                try:
+                    newNode = now.RIGHT()
+                    self.nodeList[newNode.name]=newNode
+                    newString = toString(newNode.matrix)
+                    if not self.visited.get(newString,False) :
+                        if newNode.isGoal():
+                            found=True
+                            ans=newNode
+                        else:
+                            self.prioQ.put((newNode.cost,newNode))
+                except :
+                    pass
 
-            try:
-                newNode = now.LEFT()
-                self.nodeList[newNode.name]=newNode
-                newString = toString(newNode.matrix)
-                if not self.visited.get(newString,False) :
-                    if newNode.isGoal():
-                        found=True
-                        ans=newNode
-                    else:
-                        self.prioQ.put((newNode.cost,newNode))
-            except :
-                pass
+                try:
+                    newNode = now.LEFT()
+                    self.nodeList[newNode.name]=newNode
+                    newString = toString(newNode.matrix)
+                    if not self.visited.get(newString,False) :
+                        if newNode.isGoal():
+                            found=True
+                            ans=newNode
+                        else:
+                            self.prioQ.put((newNode.cost,newNode))
+                except :
+                    pass
 
-            self.visited[toString(now.matrix)] = True
+                self.visited[toString(now.matrix)] = True
 
         end = time()
         current = ans.name

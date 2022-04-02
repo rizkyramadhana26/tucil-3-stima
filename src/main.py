@@ -1,5 +1,6 @@
 from Node import *
 from BranchNBound import *
+from utils import *
 
 source = input("Ketik 1 untuk menggunakan puzzle random, ketik 2 untuk menggunakan puzzle dari file : ")
 if source=='1':
