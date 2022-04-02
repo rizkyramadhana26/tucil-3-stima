@@ -35,7 +35,7 @@ class BranchNBound :
             for j in range(i+1,16):
                 if flat[j]<flat[i]:
                     kurang+=1
-            kurangs[i]=kurang
+            kurangs[self.start.matrix[i//4][i%4]-1]=kurang
 
         print("PUZZLE AWAL")
         self.start.print()
