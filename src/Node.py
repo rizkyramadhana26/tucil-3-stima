@@ -21,7 +21,7 @@ class Node:
             i=self.nullPos[0]
             j=self.nullPos[1]
             temp[i][j] = temp[i-1][j]
-            temp[i-1][j] = 0
+            temp[i-1][j] = 16
             cost = self.countCost(temp)
             return Node(self.name,temp,(i-1,j),self.level+1)
 
@@ -36,7 +36,7 @@ class Node:
             i=self.nullPos[0]
             j=self.nullPos[1]
             temp[i][j] = temp[i+1][j]
-            temp[i+1][j] = 0
+            temp[i+1][j] = 16
             cost = self.countCost(temp)
             return Node(self.name,temp,(i+1,j),self.level+1)
     def LEFT(self):
@@ -50,7 +50,7 @@ class Node:
             i=self.nullPos[0]
             j=self.nullPos[1]
             temp[i][j] = temp[i][j-1]
-            temp[i][j-1] = 0
+            temp[i][j-1] = 16
             cost = self.countCost(temp)
             return Node(self.name,temp,(i,j-1),self.level+1)
 
@@ -65,7 +65,7 @@ class Node:
             i=self.nullPos[0]
             j=self.nullPos[1]
             temp[i][j] = temp[i][j+1]
-            temp[i][j+1] = 0
+            temp[i][j+1] = 16
             cost = self.countCost(temp)
             return Node(self.name,temp,(i,j+1),self.level+1)
 
@@ -77,15 +77,13 @@ class Node:
         cost=0
         for i in range(4):
             for j in range(4):
-                if puzzle[i][j]!=4*i+j+1 and puzzle[i][j]!=0:
+                if puzzle[i][j]!=4*i+j+1 and puzzle[i][j]!=16:
                     cost+=1
 
-        if puzzle[3][3]!=0:
-            cost+=1
         return cost+self.level
 
     def isGoal(self):
-        goal = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,0]]
+        goal = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]]
         return self.matrix == goal
 
     def print(self):
@@ -93,12 +91,12 @@ class Node:
         for i in range(3):
             print("* ",end="")
             for j in range(3):
-                if self.matrix[i][j]!=0 :
+                if self.matrix[i][j]!=16 :
                     print(str(self.matrix[i][j]).ljust(2),end="")
                 else:
                     print("  ",end="")
                 print(" | ",end="")
-            if self.matrix[i][3]!=0 :
+            if self.matrix[i][3]!=16 :
                 print(str(self.matrix[i][3]).ljust(2),end="")
             else:
                  print("  ",end="")
@@ -106,12 +104,15 @@ class Node:
             print("*-------------------*")
         print("* ",end="")
         for j in range(3):
-            if self.matrix[i][j]!=0 :
+            if self.matrix[3][j]!=16 :
                 print(str(self.matrix[3][j]).ljust(2),end="")
             else:
                 print("  ",end="")
             print(" | ",end="")
-        print(str(self.matrix[3][3]).ljust(2),end="")
+            
+        if self.matrix[3][3]!=16 :
+           print(str(self.matrix[3][3]).ljust(2),end="")
+        else:
+            print("  ",end="")
         print(" *")
-        print("*-------------------*")
         print("=====================")
