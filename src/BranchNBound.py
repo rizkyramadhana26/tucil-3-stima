@@ -28,7 +28,6 @@ class BranchNBound :
     def check(self):
         kurangs = [0 for i in range(16)]
         flat = self.start.matrix[0]+self.start.matrix[1]+self.start.matrix[2]+self.start.matrix[3]
-        print(flat)
 
         for i in range(16):
             kurang=0
